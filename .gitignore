@@ -6,6 +6,11 @@
 .cache
 dist
 
+# Ignorer le client Prisma généré
+prisma/generated/
+# ou, si le client se trouve dans node_modules
+.prisma/
+
 # Node dependencies
 node_modules
 
