@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Active le plugin Flowbite */
+@plugin "flowbite/plugin";
+/* Charge les sources JS de Flowbite si nécessaire */
+@source "../node_modules/flowbite";
