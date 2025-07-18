@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     key: process.env.SUPABASE_KEY,
     redirect:false,
   },
+  icon: {
+    mode: 'css',
+    cssLayer: 'base'
+  },
   modules: [
     '@nuxt/eslint',
     '@nuxt/icon',
