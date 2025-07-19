@@ -7,11 +7,6 @@ export const productSchema = z.object({
     description: z.string(),
     category: z.string(),
     image: z.string(),
-    rating: z.object({
-        rate: z.coerce.number(),
-        count: z.coerce.number()
     })
-
-})
 
 export type ProductDto = z.infer<typeof productSchema>

@@ -1,6 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
 import typescript from '@rollup/plugin-typescript'
+import { createResolver } from "@nuxt/kit";
+const resolver = createResolver(import.meta.url);
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -13,8 +15,10 @@ export default defineNuxtConfig({
         ],
         resolve: {
           alias: {
-            // https://github.com/nuxt/nuxt/issues/24690#issuecomment-2254528534
-            ".prisma/client/index-browser": "./node_modules/.prisma/client/index-browser.js"
+            ".prisma/client/index-browser":
+            // https://vite.dev/config/shared-options.html#resolve-alias
+            // When aliasing to file system paths, always use absolute paths.
+                resolver.resolve("./node_modules/.prisma/client/index-browser.js"),
           },
         },
         // 3) On empêche Prisma d’être bundle côté client
@@ -23,12 +27,7 @@ export default defineNuxtConfig({
         },
       },
 
-      nitro: {
-        externals: {
-          // 4) On force Prisma dans le bundle serveur Nitro
-          inline: ['@prisma/client'],
-        },
-      },
+
   supabase:{
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,
